@@ -5,12 +5,16 @@
 
 FROM nginx:latest
 
-# Append "daemon off;" to the beginning of the configuration
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+# Copy nginx.conf file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Make sites directories
+RUN mkdir -p /etc/nginx/sites-available
+RUN mkdir -p /etc/nginx/sites-enabled
 
 # Copy a configuration file from the current directory
-ADD cache.conf /etc/nginx/sites-available
-RUN ln -s /etc/nginx/sites-available/cache.conf /etc/nginx/sites-enabled
+COPY cache.conf /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/cache.conf /etc/nginx/sites-enabled/
 
 # Expose ports
 EXPOSE 80
