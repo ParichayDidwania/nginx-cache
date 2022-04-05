@@ -10,10 +10,11 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Copy a configuration file from the current directory
 ADD cache.conf /etc/nginx/sites-available
+RUN ln -s /etc/nginx/sites-available/cache.conf /etc/nginx/sites-enabled
 
 # Expose ports
 EXPOSE 80
 
 # Set the default command to execute
 # when creating a new container
-CMD ln -s /etc/nginx/sites-available/cache.conf /etc/nginx/sites-enabled && service nginx start
+CMD service nginx start
