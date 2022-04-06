@@ -19,4 +19,4 @@ spec:
           - path: /
             backend:
               serviceName: backend-app-service
-              servicePort: http
+              servicePort: 5000
